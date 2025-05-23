@@ -1,2 +1,69 @@
-<p>Now I can render any React component on any DOM node I want using ReactDOM.render</p>
+import React, { useState, useMemo } from 'react';
+import ReactMemoComponent from './ReactMemo';
+import UseMemoComponent from './UseMemo';
 
+function App() {
+  const [todos, setTodos] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [inputValue, setInputValue] = useState('');
+
+  // Add predefined todo
+  const addTodo = () => {
+    setTodos([...todos, 'New todo']);
+  };
+
+  // Add custom todo with validation
+  const addCustomTodo = () => {
+    if (inputValue.length > 5) {
+      setTodos([...todos, inputValue]);
+      setInputValue('');
+    }
+  };
+
+  // Increment counter
+  const incrementCounter = () => {
+    setCounter(counter + 1);
+  };
+
+  // Memoized todo list calculation
+  const memoizedTodos = useMemo(() => {
+    return todos.map((todo, index) => (
+      <li key={index}>{todo}</li>
+    ));
+  }, [todos]);
+
+  return (
+    <div>
+      <h1>Task Management App</h1>
+      
+      <div>
+        <h2>Todo List</h2>
+        <button onClick={addTodo}>Add Todo</button>
+        <ul>{memoizedTodos}</ul>
+        
+        <div>
+          <input 
+            type="text" 
+            value={inputValue} 
+            onChange={(e) => setInputValue(e.target.value)} 
+            placeholder="Enter custom task (min 6 chars)"
+          />
+          <button onClick={addCustomTodo}>Submit</button>
+          {inputValue.length <= 5 && inputValue.length > 0 && (
+            <p style={{color: 'red'}}>Task must be more than 5 characters</p>
+          )}
+        </div>
+      </div>
+      
+      <div>
+        <h2>Counter: {counter}</h2>
+        <button onClick={incrementCounter}>Increment</button>
+      </div>
+      
+      <UseMemoComponent data={todos} />
+      <ReactMemoComponent count={counter} />
+    </div>
+  );
+}
+
+export default App;
