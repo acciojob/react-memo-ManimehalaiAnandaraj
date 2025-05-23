@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import ReactMemo from './ReactMemo';
-import UseMemo from './UseMemo';
+import ReactMemoComponent from './ReactMemo';
+import UseMemoComponent from './UseMemo';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -40,7 +40,7 @@ function App() {
       
       <div>
         <h2>Todo List</h2>
-        <button onClick={addTodo}>Add Todo</button>
+        <button onClick={addTodo}>New todo</button>
         <ul>{memoizedTodos}</ul>
         
         <div>

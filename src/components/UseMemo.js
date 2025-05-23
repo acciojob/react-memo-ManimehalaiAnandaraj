@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-function UseMemo({ data }) {
+function UseMemoComponent({ data }) {
   const expensiveCalculation = useMemo(() => {
     console.log('Performing expensive calculation...');
     return data.length * 100;
@@ -14,4 +14,4 @@ function UseMemo({ data }) {
   );
 }
 
-export default UseMemo;
+export default UseMemoComponent;
