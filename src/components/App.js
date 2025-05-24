@@ -40,7 +40,7 @@ function App() {
       
       <div>
         <h2>Todo List</h2>
-        <button onClick={addTodo}>New todo</button>
+        <button onClick={addTodo}>Add todo</button>
         <ul>{memoizedTodos}</ul>
         
         <div>
