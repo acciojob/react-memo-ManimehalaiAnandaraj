@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReactMemoComponent = React.memo(({ count }) => {
+const ReactMemo = React.memo(({ count }) => {
   console.log('ReactMemoComponent rendered');
   return (
     <div>
@@ -11,4 +11,4 @@ const ReactMemoComponent = React.memo(({ count }) => {
   );
 });
 
-export default ReactMemoComponent;
+export default ReactMemo;

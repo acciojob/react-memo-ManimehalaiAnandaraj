@@ -1,23 +1,23 @@
 import React, { useState, useMemo } from 'react';
-import ReactMemoComponent from './ReactMemo';
-import UseMemoComponent from './UseMemo';
+import ReactMemo from './ReactMemo';
+import UseMemo from './UseMemo';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState('');
 
-  // Add predefined todo
+  
   const addTodo = () => {
     setTodos([...todos, 'New todo']);
   };
 
-  // Increment counter
+ 
   const incrementCounter = () => {
     setCounter(counter + 1);
   };
 
-  // Add custom todo with validation
+ 
   const addCustomTodo = () => {
     if (inputValue.length > 5) {
       setTodos([...todos, inputValue]);
@@ -27,7 +27,7 @@ function App() {
 
   
 
-  // Memoized todo list calculation
+  
   const memoizedTodos = useMemo(() => {
     return todos.map((todo, index) => (
       <li key={index}>{todo}</li>
