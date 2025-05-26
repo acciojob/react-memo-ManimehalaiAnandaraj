@@ -8,9 +8,13 @@ function App() {
   const [inputValue, setInputValue] = useState('');
 
   
-  const addTodo = () => {
-    setTodos([...todos, 'New todo']);
-  };
+ const addTodo = () => {
+    if (inputValue.length > 5) {
+        setTodos([...todos, inputValue]);
+        setInputValue('');
+    }
+};
+  
 
  
   const incrementCounter = () => {
@@ -62,8 +66,8 @@ function App() {
         <button onClick={incrementCounter}>Increment</button>
       </div>
       
-      <UseMemoComponent data={todos} />
-      <ReactMemoComponent count={counter} />
+      <UseMemo data={todos} />
+      <ReactMemo count={counter} />
     </div>
   );
 }
