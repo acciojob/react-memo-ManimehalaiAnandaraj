@@ -7,31 +7,17 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [inputValue, setInputValue] = useState('');
 
-  
- const addTodo = () => {
-    if (inputValue.length > 5) {
-        setTodos([...todos, inputValue]);
-        setInputValue('');
-    }
-};
-  
-
- 
-  const incrementCounter = () => {
-    setCounter(counter + 1);
-  };
-
- 
-  const addCustomTodo = () => {
+  const addTodo = () => {
     if (inputValue.length > 5) {
       setTodos([...todos, inputValue]);
       setInputValue('');
     }
   };
 
-  
+  const incrementCounter = () => {
+    setCounter(counter + 1);
+  };
 
-  
   const memoizedTodos = useMemo(() => {
     return todos.map((todo, index) => (
       <li key={index}>{todo}</li>
@@ -44,21 +30,18 @@ function App() {
       
       <div>
         <h2>Todo List</h2>
+        <input 
+          type="text" 
+          value={inputValue} 
+          onChange={(e) => setInputValue(e.target.value)} 
+          placeholder="Enter custom task (min 6 chars)"
+        />
         <button onClick={addTodo}>Add todo</button>
         <ul>{memoizedTodos}</ul>
         
-        <div>
-          <input 
-            type="text" 
-            value={inputValue} 
-            onChange={(e) => setInputValue(e.target.value)} 
-            placeholder="Enter custom task (min 6 chars)"
-          />
-          <button onClick={addCustomTodo}>Submit</button>
-          {inputValue.length <= 5 && inputValue.length > 0 && (
-            <p style={{color: 'red'}}>Task must be more than 5 characters</p>
-          )}
-        </div>
+        {inputValue.length <= 5 && inputValue.length > 0 && (
+          <p style={{color: 'red'}}>Task must be more than 5 characters</p>
+        )}
       </div>
       
       <div>
