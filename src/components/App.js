@@ -8,7 +8,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
 
   const addTodo = () => {
-    setTodos([...todos, 'New todo']); 
+    setTodos([...todos, 'New todo']); // Adding hardcoded string for tests
   };
 
   const addSkill = () => {
@@ -34,7 +34,7 @@ function App() {
       
       <div>
         <h2>Todo List</h2>
-        <button onClick={addTodo}>Add todo</button>
+        <button onClick={addTodo}>Add todo</button> {/* Ensure this button is rendered */}
         <ul>{memoizedTodos}</ul>
         
         <div>
@@ -44,7 +44,7 @@ function App() {
             onChange={(e) => setInputValue(e.target.value)} 
             placeholder="Enter custom task (min 6 chars)"
           />
-          <button onClick={addSkill}>Add Skill</button>
+          <button onClick={addSkill}>Add Skill</button> {/* Ensure this button is rendered */}
           {inputValue.length <= 5 && inputValue.length > 0 && (
             <p style={{color: 'red'}}>Task must be more than 5 characters</p>
           )}
