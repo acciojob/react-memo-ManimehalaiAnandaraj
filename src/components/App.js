@@ -8,7 +8,7 @@ function App() {
   const [inputValue, setInputValue] = useState('');
 
   const addTodo = () => {
-    setTodos([...todos, 'New todo']); // Hardcoded string for test case
+    setTodos([...todos, 'New todo']); 
   };
 
   const addSkill = () => {
