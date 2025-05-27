@@ -1,14 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-const ReactMemo = React.memo(({ count }) => {
-  console.log('ReactMemoComponent rendered');
+const ReactMemo = React.memo(({userInputs}) => {
   return (
     <div>
-      <h3>React.memo Demonstration</h3>
-      <p>Current count from parent: {count}</p>
-      <p>This component only re-renders when count prop changes.</p>
+      <ul>
+        {userInputs.map((item, index) => {
+          return (
+            <li key={index}>{item}</li>
+          )
+        })}
+      </ul>
     </div>
-  );
-});
+  )
+})
 
-export default ReactMemo;
+export default ReactMemo

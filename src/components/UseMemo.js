@@ -1,17 +1,21 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react'
 
-function UseMemo({ data }) {
-  const expensiveCalculation = useMemo(() => {
-    console.log('Performing expensive calculation...');
-    return data.length * 100;
-  }, [data]);
-
+const UseMemo = () => {
+  
+  const handleCalculation = (n) => {
+    let result = 0;
+    for(let i=0; i<=n; i++){
+      result += i
+    }
+    return result
+  }
+  const calculatedResult = useMemo(() => handleCalculation(10000), [])
   return (
     <div>
-      <h3>useMemo Demonstration</h3>
-      <p>Total todos calculated value: {expensiveCalculation}</p>
+      <h1>Expensive Calculation</h1>
+      <p>{calculatedResult}</p>
     </div>
-  );
+  )
 }
 
-export default UseMemo;
+export default UseMemo

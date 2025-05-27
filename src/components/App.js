@@ -1,65 +1,53 @@
-import React, { useState, useMemo } from 'react';
-import ReactMemo from './ReactMemo';
-import UseMemo from './UseMemo';
+import React, { useState } from 'react'
+import UseMemo from './UseMemo'
+import ReactMemo from './ReactMemo'
 
-function App() {
-  const [todos, setTodos] = useState([]);
-  const [counter, setCounter] = useState(0);
-  const [inputValue, setInputValue] = useState('');
-
-  const addTodo = () => {
-    setTodos([...todos, 'New todo']); // Adding hardcoded string for tests
-  };
-
-  const addSkill = () => {
-    if (inputValue.length > 5) {
-      setTodos([...todos, inputValue]);
-      setInputValue('');
+const App = () => {
+  const [todoList, setTodoList] = useState([])
+  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState("")
+  const [userInputs, setUserInputs] = useState([])
+  function handleClick(){
+    setTodoList([...todoList, "New Todo"])
+  }
+  function handleAdd(e){
+    if (inputValue.trim().length > 5) {
+      setUserInputs([...userInputs, inputValue.trim()])
+      setInputValue('')
+    } else {
+      alert('Task must be more than 5 characters')
     }
-  };
-
-  const incrementCounter = () => {
-    setCounter(counter + 1);
-  };
-
-  const memoizedTodos = useMemo(() => {
-    return todos.map((todo, index) => (
-      <li key={index}>{todo}</li>
-    ));
-  }, [todos]);
-
+  }
   return (
-    <div>
-      <h1>Task Management App</h1>
-      
-      <div>
-        <h2>Todo List</h2>
-        <button onClick={addTodo}>Add todo</button> {/* Ensure this button is rendered */}
-        <ul>{memoizedTodos}</ul>
-        
-        <div>
-          <input 
-            type="text" 
-            value={inputValue} 
-            onChange={(e) => setInputValue(e.target.value)} 
-            placeholder="Enter custom task (min 6 chars)"
-          />
-          <button onClick={addSkill}>Add Skill</button> {/* Ensure this button is rendered */}
-          {inputValue.length <= 5 && inputValue.length > 0 && (
-            <p style={{color: 'red'}}>Task must be more than 5 characters</p>
-          )}
-        </div>
+    <div className='app'>
+      <div className='todo-container'>
+        <h1>My Todos</h1>
+        {todoList.map((item, index) => {
+          return (
+            <p key={index}>{item}</p>
+          )
+        })}
+        <button onClick={handleClick}>Add Todo</button>
       </div>
-      
-      <div>
-        <h2>Counter: {counter}</h2>
-        <button onClick={incrementCounter}>Increment</button>
+      <div className='counter-container'>
+        <p>Count: {count}</p>
+        <button onClick={() => setCount(prev => prev + 1)}>+</button>
       </div>
-      
-      <UseMemo data={todos} />
-      <ReactMemo count={counter} />
+      <UseMemo />
+      <div>
+        <h1>React.memo</h1>
+        <input 
+          type="text" 
+          min="5" 
+          onChange={(e) => setInputValue(e.target.value)}
+          value={inputValue}  
+          placeholder="Enter task (min 6 chars)"
+        />
+        <button onClick={(e) => handleAdd(e)}>Add Skill</button>
+        <ReactMemo userInputs={userInputs}/>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
